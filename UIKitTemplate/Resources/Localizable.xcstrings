@@ -34,13 +34,46 @@
         }
       }
     },
-    "MainMenuDefaultDataText" : {
+    "MainMenuDataTextEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No todos fetched"
+          }
+        }
+      }
+    },
+    "MainMenuDataTextLoading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetching todos"
+          }
+        }
+      }
+    },
+    "MainMenuDataTextNotLoaded" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No data loaded yet"
+          }
+        }
+      }
+    },
+    "MainMenuDataTextPrefix" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetched todo: "
           }
         }
       }
@@ -74,6 +107,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Main Menu"
+          }
+        }
+      }
+    },
+    "NetworkRequestFailedDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request failed"
           }
         }
       }

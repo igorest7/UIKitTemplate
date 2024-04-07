@@ -1,5 +1,3 @@
-struct ClientError {
-
+struct ViewStateError {
     let description: String
-
 }

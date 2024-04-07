@@ -4,8 +4,7 @@ final class MainMenuViewController: UIViewController, CombineCancellableHolder {
 
     //MARK: - IBOutlets
     @IBOutlet private var titleLabel: UILabel! {
-        didSet {
-            titleLabel.text = Localizable.mainMenuTitle
+        didSet { 
             titleLabel.font = UIFont.fontWith(format: .title)
             titleLabel.textColor = Color.text
         }
@@ -13,8 +12,7 @@ final class MainMenuViewController: UIViewController, CombineCancellableHolder {
 
     @IBOutlet private var dataLabel: UILabel! {
         didSet {
-            dataLabel.text = Localizable.mainMenuDefaultDataText
-            dataLabel.font = UIFont.fontWith(format: .title)
+            dataLabel.font = UIFont.fontWith(format: .body)
             dataLabel.textColor = Color.text
         }
     }
@@ -38,7 +36,6 @@ final class MainMenuViewController: UIViewController, CombineCancellableHolder {
     public init(viewModel: MainMenuViewModel) {
         self.viewModel = viewModel
         super.init(nibName: "MainMenuViewController", bundle: nil)
-        subscribeToStateUpdates()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -48,23 +45,20 @@ final class MainMenuViewController: UIViewController, CombineCancellableHolder {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        subscribeToStateUpdates()
     }
 
     private func subscribeToStateUpdates() {
-        let cancellable = viewModel.statePublisher.sink(
+        let cancellable = viewModel.statePublisher.receive(on: DispatchQueue.main).sink(
             receiveValue: { [weak self] state in
                 guard let self = self else { return }
-                switch state {
-                case .ready(let viewState):
-                    self.handleReadyState(viewState)
-                default: break
-                }
+                self.refreshState(state)
             }
         )
         cancellables.append(cancellable)
     }
 
-    private func handleReadyState(_ state: MainMenuViewState) {
+    private func refreshState(_ state: MainMenuViewState) {
         dataLabel.text = state.dataString
     }
 

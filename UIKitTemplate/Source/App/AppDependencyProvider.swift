@@ -1,5 +1,8 @@
+import Foundation
+
 class AppDependencyProvider {
-    lazy var remoteService: RemoteService = {
-        ConcreteRemoteService()
+    lazy var todoService: TodoService = {
+        let url = URL(string: "https://jsonplaceholder.typicode.com/todos") ?? URL(fileURLWithPath: "")
+        return RemoteTodoService(baseURL: url)
     }()
 }

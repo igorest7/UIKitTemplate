@@ -1,18 +1,22 @@
 import Combine
 import Foundation
 
-class MainMenuViewModel {
+class MainMenuViewModel: CombineCancellableHolder, MainMenuViewState {
 
-    var statePublisher: CurrentValueSubject<ViewState<MainMenuViewState>, Never> = .init(.empty)
+    lazy var statePublisher: CurrentValueSubject<MainMenuViewState, Never> = .init(self)
+
+    private(set) var dataString = Localizable.mainMenuDataTextNotLoaded
+    private(set) var titleString = Localizable.mainMenuTitle
+    private(set) var error: ViewStateError?
 
     private let router: MainMenuRouter
-    private let remoteService: RemoteService
+    private let todoService: TodoService
 
-    private var dataString = "No data"
+    private var todos = [Todo]()
 
-    init(router: MainMenuRouter, remoteService: RemoteService) {
+    init(router: MainMenuRouter, todoService: TodoService) {
         self.router = router
-        self.remoteService = remoteService
+        self.todoService = todoService
     }
 
     func openDetailsTapped() {
@@ -20,15 +24,31 @@ class MainMenuViewModel {
     }
 
     func refreshTapped() {
-        statePublisher.send(.loading)
-        remoteService.fetchData { [weak self] fetchedString in
-            self?.dataString = fetchedString
-            self?.updateReadyState()
-        }
+        dataString = Localizable.mainMenuDataTextLoading
+        updateState()
+        todoService.fetchData()
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self, case .failure(let error) = completion else { return }
+                    self.error = error.asViewStateError
+                    self.updateState()
+                },
+                receiveValue: { [weak self] todos in
+                    guard let self = self else { return }
+                    self.todos = todos
+                    guard let todo = todos.first else {
+                        self.dataString = Localizable.mainMenuDataTextEmpty
+                        return
+                    }
+                    self.dataString = Localizable.mainMenuDataTextPrefix + todo.title
+                    self.updateState()
+                }
+            )
+            .store(in: &cancellables)
     }
 
-    private func updateReadyState() {
-        let state = MainMenuViewState(dataString: dataString)
-        statePublisher.send(.ready(state))
+    private func updateState() {
+        self.statePublisher.send(self)
     }
 }
+
