@@ -1,5 +1,5 @@
 import Combine
 
 protocol TodoService {
-    func fetchData() -> AnyPublisher<[Todo], TodoServiceError>
+    func fetchTodos() -> AnyPublisher<[Todo], TodoServiceError>
 }

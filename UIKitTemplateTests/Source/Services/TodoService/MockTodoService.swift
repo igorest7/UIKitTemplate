@@ -5,7 +5,7 @@ class MockTodoService: TodoService {
 
     var fetchDataPublisher: PassthroughSubject<[Todo], TodoServiceError> = .init()
 
-    func fetchData() -> AnyPublisher<[Todo], TodoServiceError> {
+    func fetchTodos() -> AnyPublisher<[Todo], TodoServiceError> {
         return fetchDataPublisher.eraseToAnyPublisher()
     }
 }

@@ -9,7 +9,7 @@ class RemoteTodoService: TodoService {
         self.baseURL = baseURL
     }
 
-    func fetchData() -> AnyPublisher<[Todo], TodoServiceError> {
+    func fetchTodos() -> AnyPublisher<[Todo], TodoServiceError> {
         URLSession.shared.dataTaskPublisher(for: baseURL)
                     .map(\.data)
                     .decode(type: [Todo].self, decoder: JSONDecoder())

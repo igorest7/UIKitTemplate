@@ -26,7 +26,7 @@ class MainMenuViewModel: CombineCancellableHolder, MainMenuViewState {
     func refreshTapped() {
         dataString = Localizable.mainMenuDataTextLoading
         updateState()
-        todoService.fetchData()
+        todoService.fetchTodos()
             .sink(
                 receiveCompletion: { [weak self] completion in
                     guard let self = self, case .failure(let error) = completion else { return }
