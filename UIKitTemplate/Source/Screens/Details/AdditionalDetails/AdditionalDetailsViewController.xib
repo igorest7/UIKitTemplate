@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AdditionalDetailsViewController" customModule="UIKitTemplate" customModuleProvider="target">
             <connections>
+                <outlet property="mainMenuButton" destination="VPw-OO-qXo" id="tth-yG-C3c"/>
                 <outlet property="titleLabel" destination="ExC-p3-Jy2" id="sJY-d9-fcy"/>
                 <outlet property="view" destination="iN0-l3-epB" id="bRs-tw-0fv"/>
             </connections>
@@ -28,11 +29,25 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPw-OO-qXo">
+                    <rect key="frame" x="50" y="249" width="293" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="gix-KS-AGR"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <connections>
+                        <action selector="mainMenuTapped:" destination="-1" eventType="touchUpInside" id="JTx-h8-HQz"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VPw-OO-qXo" secondAttribute="trailing" constant="50" id="L16-Le-cCM"/>
                 <constraint firstItem="ExC-p3-Jy2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="100" id="P4E-ys-9Ia"/>
+                <constraint firstItem="VPw-OO-qXo" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="aoS-sr-Jkf"/>
+                <constraint firstItem="VPw-OO-qXo" firstAttribute="top" secondItem="ExC-p3-Jy2" secondAttribute="bottom" constant="50" id="kQk-UW-K2O"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ExC-p3-Jy2" secondAttribute="trailing" constant="100" id="njB-7w-GDK"/>
                 <constraint firstItem="ExC-p3-Jy2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="100" id="yx9-RZ-PgR"/>
             </constraints>

@@ -1,4 +1,4 @@
-final class ConcreteAssembler: Assembler {
+final class ConcreteViewModelFactory: ViewModelFactory {
 
     let appDependencyProvider: AppDependencyProvider
 

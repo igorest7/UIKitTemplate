@@ -1,27 +1,40 @@
+import Combine
 import UIKit
 
-class MainMenuCoordinator: ParentCoordinator {
+class MainMenuCoordinator {
 
     private let router = MainMenuRouter()
     let rootViewController: UIViewController
-    private let assembler: Assembler
+    private let viewModelFactory: ViewModelFactory
     private var child: DetailsCoordinator?
 
-    init(assembler: Assembler) {
-        self.assembler = assembler
+    init(viewModelFactory: ViewModelFactory) {
+        self.viewModelFactory = viewModelFactory
 
-        rootViewController = assembler.assembleMainMenu(with: router)
+        rootViewController = MainMenuViewController(viewModel: viewModelFactory.buildMainMenuViewModel(with: router))
         setup()
     }
 
     private func setup() {
-        router.onRouteRequest = { [weak self] in self?.handleRouteRequest(to: $0) }
+        router.routingPublisher
+            .subscribe(
+                Subscribers.Sink(
+                    receiveCompletion: { _ in },
+                    receiveValue: (
+                        { [weak self] routeRequest in
+                            self?.handleRouteRequest(to: routeRequest)
+                        }
+                    )
+                )
+            )
     }
 
     private func handleRouteRequest(to route: MainMenuRouter.Route) {
         switch route {
-            case .openDetails:
-                let coordinator = DetailsCoordinator(parent: self, assembler: assembler)
+            case .details(let detailsTitle):
+                let coordinator = DetailsCoordinator(viewModelFactory: viewModelFactory, basicDetailsPageTitle: detailsTitle) { [weak self] in
+                    self?.done()
+                }
                 child = coordinator
                 coordinator.rootViewController.modalPresentationStyle = .fullScreen
                 rootViewController.present(coordinator.rootViewController, animated: true, completion: nil)

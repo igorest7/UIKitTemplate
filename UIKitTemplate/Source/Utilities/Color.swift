@@ -1,6 +1,6 @@
 import UIKit
 
-struct Color {
-    static let main = UIColor(named: "Main")
-    static let text = UIColor(named: "Text")
+extension UIColor {
+    static let mainCustom = UIColor(named: "Main")
+    static let textCustom = UIColor(named: "Text")
 }

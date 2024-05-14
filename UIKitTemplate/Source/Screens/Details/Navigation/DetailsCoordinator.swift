@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 
 class DetailsCoordinator: NSObject {
@@ -5,72 +6,60 @@ class DetailsCoordinator: NSObject {
     private let router = DetailsRouter()
     let rootViewController: UIViewController
     private let navigationController: UINavigationController
-    private let assembler: Assembler
-    private let parent: ParentCoordinator
+    private let viewModelFactory: ViewModelFactory
+    private let onDone: () -> Void
 
     init(
-        parent: ParentCoordinator,
-        assembler: Assembler,
-        navigationController: UINavigationController = UINavigationController()
+        viewModelFactory: ViewModelFactory,
+        navigationController: UINavigationController = UINavigationController(),
+        basicDetailsPageTitle: String,
+        onDone: @escaping () -> Void
     ) {
-        self.assembler = assembler
+        self.viewModelFactory = viewModelFactory
         self.navigationController = navigationController
-        self.parent = parent
+        self.onDone = onDone
         rootViewController = navigationController
         super.init()
 
-        let basicDetailsView = assembler.assembleBasicDetailsView(with: router)
+        let viewModel = viewModelFactory.buildBasicDetailsViewModel(with: router, pageTitle: basicDetailsPageTitle)
+        let viewController = BasicDetailsViewController(viewModel: viewModel)
 
-        addBackButton(to: basicDetailsView)
-        navigationController.viewControllers = [basicDetailsView]
+        navigationController.viewControllers = [viewController]
         setup()
     }
 
-
     private func setup() {
-        router.onRouteRequest = { [weak self] in self?.handleRouteRequest(to: $0) }
-
+        router.routingPublisher
+            .subscribe(
+                Subscribers.Sink(
+                    receiveCompletion: { _ in },
+                    receiveValue: (
+                        { [weak self] routeRequest in
+                            self?.handleRouteRequest(to: routeRequest)
+                        }
+                    )
+                )
+        )
         setupNavigationBar()
     }
 
     func setupNavigationBar() {
-        navigationController.navigationBar.backgroundColor = Color.main
+        navigationController.navigationBar.backgroundColor = .mainCustom
         navigationController.navigationBar.isTranslucent = false
     }
 
     private func handleRouteRequest(to route: DetailsRouter.Route) {
         let viewController: UIViewController
         switch route {
-            case .mainMenu:
-                parent.done()
+            case .closeJourney:
+                onDone()
                 return
-            case.additionalDetails:
-            viewController = assembler.assembleAdditionalDetailsView(with: router)
+            case .back:
+                navigationController.popViewController(animated: true)
+                return
+            case .additionalDetails(let pageTitle):
+                viewController = AdditionalDetailsViewController(viewModel: viewModelFactory.buildAdditionalDetailsViewModel(with: router, pageTitle: pageTitle))
         }
-        addBackButton(to: viewController)
         navigationController.pushViewController(viewController, animated: true)
-    }
-
-    func done() {
-        navigationController.dismiss(animated: true, completion: nil)
-    }
-
-    private func addBackButton(to viewController: UIViewController) {
-        let backButton = UIButton()
-        backButton.setImage(UIImage(systemName: "arrow.left.square.fill"), for: .normal)
-        backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
-        backButton.frame = CGRect(x: 0, y: 0, width: 60, height: 44)
-
-        let barButton = UIBarButtonItem(customView: backButton)
-        viewController.navigationItem.leftBarButtonItem = barButton
-    }
-
-    @objc
-    private func backTapped() {
-        if navigationController.viewControllers.count > 1 {
-            navigationController.popViewController(animated: true)
-        } else {
-             handleRouteRequest(to: .mainMenu)
-        }
     }
 }

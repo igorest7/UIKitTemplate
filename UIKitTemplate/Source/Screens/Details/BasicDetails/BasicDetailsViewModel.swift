@@ -1,15 +1,8 @@
-import Foundation
+import Combine
 
-class BasicDetailsViewModel {
+protocol BasicDetailsViewModel {
+    var statePublisher: CurrentValueSubject<BasicDetailsViewState, Never> { get }
 
-    private let router: DetailsRouter
-
-    init(router: DetailsRouter) {
-        self.router = router
-    }
-
-    func backTapped() {
-        router.route(to: .additionalDetails)
-    }
-
+    func backTapped()
+    func additionalDetailsTapped()
 }

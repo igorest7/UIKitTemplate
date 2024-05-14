@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="dataLabel" destination="avs-SI-g7H" id="Bfy-Gi-jd1"/>
                 <outlet property="openDetailsButton" destination="Vrv-Mg-TNx" id="t1K-cn-3PN"/>
+                <outlet property="openURLButton" destination="chr-wY-cjg" id="ge0-DR-uQD"/>
                 <outlet property="refreshButton" destination="yYi-De-zXi" id="rcG-Pn-aoo"/>
                 <outlet property="titleLabel" destination="haD-wm-VrQ" id="cQP-Vs-JMl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -62,6 +63,17 @@
                         <action selector="refreshTapped:" destination="-1" eventType="touchUpInside" id="d05-Gn-cq3"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chr-wY-cjg">
+                    <rect key="frame" x="50" y="446" width="293" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Gzb-Rh-IXX"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <connections>
+                        <action selector="openURLTapped:" destination="-1" eventType="touchUpInside" id="ukd-HT-Mjz"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -73,9 +85,12 @@
                 <constraint firstItem="Vrv-Mg-TNx" firstAttribute="top" secondItem="haD-wm-VrQ" secondAttribute="bottom" constant="50" id="Bes-7a-eEW"/>
                 <constraint firstItem="avs-SI-g7H" firstAttribute="top" secondItem="Vrv-Mg-TNx" secondAttribute="bottom" constant="50" id="H3C-gA-BFt"/>
                 <constraint firstItem="Vrv-Mg-TNx" firstAttribute="top" secondItem="haD-wm-VrQ" secondAttribute="bottom" constant="50" id="J2r-nl-nkA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="chr-wY-cjg" secondAttribute="trailing" constant="50" id="JpA-Pq-vgx"/>
+                <constraint firstItem="chr-wY-cjg" firstAttribute="top" secondItem="yYi-De-zXi" secondAttribute="bottom" constant="20" id="KsK-FC-nxg"/>
                 <constraint firstItem="avs-SI-g7H" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="100" id="R2r-Gc-Lev"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="avs-SI-g7H" secondAttribute="trailing" constant="100" id="R97-F4-Nxb"/>
                 <constraint firstItem="yYi-De-zXi" firstAttribute="top" secondItem="avs-SI-g7H" secondAttribute="bottom" constant="50" id="WYE-5h-GKA"/>
+                <constraint firstItem="chr-wY-cjg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="Zkb-qZ-lpj"/>
                 <constraint firstItem="Vrv-Mg-TNx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="100" id="m3P-k6-kAA"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yYi-De-zXi" secondAttribute="trailing" constant="100" id="oLg-dD-3pG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="haD-wm-VrQ" secondAttribute="trailing" constant="100" id="sNR-lC-2Hx"/>

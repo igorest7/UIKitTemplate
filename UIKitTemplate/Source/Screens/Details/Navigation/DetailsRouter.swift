@@ -1,16 +1,13 @@
-import UIKit
+import Combine
 
-class DetailsRouter: Router {
+struct DetailsRouter {
 
-    enum Route {
-        case mainMenu
-        case additionalDetails
+    enum Route: Equatable {
+        case closeJourney
+        case back
+        case additionalDetails(pageTitle: String)
     }
 
-    var onRouteRequest: ((Route) -> Void)?
-
-    func route(to route: Route) {
-        onRouteRequest?(route)
-    }
+    var routingPublisher: PassthroughSubject<Route, Never> = .init()
 
 }

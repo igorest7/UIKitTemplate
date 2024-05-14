@@ -1,13 +1,11 @@
-class MainMenuRouter {
+import Combine
 
-    enum Route {
-        case openDetails
+struct MainMenuRouter {
+
+    enum Route: Hashable {
+        case details(detailsTitle: String)
     }
 
-    var onRouteRequest: ((Route) -> Void)?
-
-    func route(to route: Route) {
-        onRouteRequest?(route)
-    }
+    var routingPublisher: PassthroughSubject<Route, Never> = .init()
 
 }

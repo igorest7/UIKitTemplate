@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "AdditionalDetailsTitle" : {
+    "additionalDetailsTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -12,29 +12,18 @@
         }
       }
     },
-    "BasicDetailsButtonTitle" : {
+    "backButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open additional details"
+            "value" : "Go back"
           }
         }
       }
     },
-    "BasicDetailsTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Basic Details"
-          }
-        }
-      }
-    },
-    "MainMenuDataTextEmpty" : {
+    "mainMenuDataTextEmpty" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -45,7 +34,7 @@
         }
       }
     },
-    "MainMenuDataTextLoading" : {
+    "mainMenuDataTextLoading" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -56,7 +45,7 @@
         }
       }
     },
-    "MainMenuDataTextNotLoaded" : {
+    "mainMenuDataTextNotLoaded" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -67,7 +56,7 @@
         }
       }
     },
-    "MainMenuDataTextPrefix" : {
+    "mainMenuDataTextPrefix" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -78,7 +67,7 @@
         }
       }
     },
-    "MainMenuDetailsButtonTitle" : {
+    "mainMenuDetailsButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -89,7 +78,18 @@
         }
       }
     },
-    "MainMenuRefreshButtonTitle" : {
+    "mainMenuOpenURLButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open details using url"
+          }
+        }
+      }
+    },
+    "mainMenuRefreshButtonTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -100,7 +100,10 @@
         }
       }
     },
-    "MainMenuTitle" : {
+    "mainMenuSheetButtonTitle" : {
+
+    },
+    "mainMenuTitle" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -111,13 +114,35 @@
         }
       }
     },
-    "NetworkRequestFailedDescription" : {
+    "networkRequestFailedDescription" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Request failed"
+          }
+        }
+      }
+    },
+    "openAdditionalDetailsButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open additional details"
+          }
+        }
+      }
+    },
+    "openMainMenuButtonTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open main menu"
           }
         }
       }

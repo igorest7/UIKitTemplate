@@ -3,19 +3,21 @@ import Combine
 
 class RemoteTodoService: TodoService {
 
-    let baseURL: URL
+    private let baseURL: URL
+    private let dataPublisherProvider: DataPublisherProvider
 
-    init(baseURL: URL) {
+    init(baseURL: URL, dataPublisherProvider: DataPublisherProvider) {
         self.baseURL = baseURL
+        self.dataPublisherProvider = dataPublisherProvider
     }
 
     func fetchTodos() -> AnyPublisher<[Todo], TodoServiceError> {
-        URLSession.shared.dataTaskPublisher(for: baseURL)
-                    .map(\.data)
-                    .decode(type: [Todo].self, decoder: JSONDecoder())
-                    .mapError { _ in
-                        TodoServiceError.requestFailed
-                    }
-                    .eraseToAnyPublisher()
+        dataPublisherProvider.dataPublisher(for: baseURL)
+            .map(\.data)
+            .decode(type: [Todo].self, decoder: JSONDecoder())
+            .mapError { _ in
+                TodoServiceError.requestFailed
+            }
+            .eraseToAnyPublisher()
     }
 }

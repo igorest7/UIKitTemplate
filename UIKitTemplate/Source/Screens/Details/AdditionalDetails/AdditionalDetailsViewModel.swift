@@ -1,11 +1,7 @@
-import Foundation
+import Combine
 
-class AdditionalDetailsViewModel {
+protocol AdditionalDetailsViewModel {
+    var statePublisher: CurrentValueSubject<AdditionalDetailsViewState, Never> { get }
 
-    private let router: DetailsRouter
-
-    init(router: DetailsRouter) {
-        self.router = router
-    }
-
+    func mainMenuTapped()
 }
